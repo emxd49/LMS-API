@@ -2,6 +2,7 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { AppError } = require("../utils/appError");
+const JWTKEY = process.env.JWT_KEY;
 const JWTEXPIRY = process.env.JWT_EXPIRY_TIME || "30m";
 const JWTREFRESHEXPIRY = process.env.JWT_REFRESH_TOKEN_EXPIRY_TIME || "24h";
 
@@ -33,17 +34,17 @@ const loginUser = async (username, password) => {
     {
       username: username,
     },
-    process.env.JWTKEY,
+    JWTKEY,
     { expiresIn: JWTEXPIRY }
   );
   const refreshToken = jwt.sign(
     {
       username: username,
     },
-    process.env.JWTKEY,
+    JWTKEY,
     { expiresIn: JWTREFRESHEXPIRY }
   );
-  return accessToken, refreshToken;
+  return { accessToken, refreshToken };
 };
 
 const generateToken = (refreshToken) => {

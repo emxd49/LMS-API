@@ -29,7 +29,7 @@ const deleteCourseByID = asyncHandler(async (id) => {
   if (!course) {
     throw new AppError(404, `No course found by ID:${id}`);
   }
-  const deletedCourse = await courseModel.findByIdAndDelete(req.params.id);
+  const deletedCourse = await courseModel.findByIdAndDelete(id);
   return deletedCourse
 });
 

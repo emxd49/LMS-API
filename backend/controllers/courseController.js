@@ -17,7 +17,6 @@ const addCourse = asyncHandler(async (req, res) => {
   if (
     !courseTitle ||
     !courseType ||
-    !gender ||
     !description ||
     !duration ||
     !created_date
@@ -41,7 +40,6 @@ const updateCourseByID = asyncHandler(async (req, res) => {
   if (
     !courseTitle ||
     !courseType ||
-    !gender ||
     !description ||
     !duration ||
     !created_date

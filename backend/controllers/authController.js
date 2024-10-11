@@ -17,11 +17,15 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All fields are mandatory!");
   }
-  const tokens = await authService.loginUser(username, password);
+  const { accessToken, refreshToken } = await authService.loginUser(
+    username,
+    password
+  );
+
   res.status(200).json({
     username: username,
-    accessToken: tokens[0],
-    refreshToken: tokens[1],
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   });
 });
 
