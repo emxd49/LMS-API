@@ -8,7 +8,10 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("All fields are mandatory!");
   }
   const newUser = await authService.addUser(username, password);
-  res.status(201).json({ message: "Successfully registered user" });
+  res.status(201).json({
+    message: "Successfully registered user",
+    username: newUser.username,
+  });
 });
 
 const loginUser = asyncHandler(async (req, res) => {

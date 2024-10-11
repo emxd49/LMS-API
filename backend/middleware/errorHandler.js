@@ -26,7 +26,7 @@ const errorHandler = (err, req, res, next) => {
       break;
     default:
       res
-        .status(statusCode)
+        .status(ERROR_CODES.INTERNAL_ERROR)
         .json({ title: ERROR_MESSAGES.INTERNAL_ERROR, message: err.message });
       console.error(err);
       break;
