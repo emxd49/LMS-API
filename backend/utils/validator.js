@@ -1,0 +1,3 @@
+const validateEmail = () => {};
+
+const validatePasswordInput = () => {};
