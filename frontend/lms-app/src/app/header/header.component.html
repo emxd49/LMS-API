@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <span>{{ title }}</span>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    @for (tab of tabs; track tab) {
+    <a mat-tab-link (click)="displayTab(tab)" [active]="activeLink == tab">
+      {{ tab }}
+    </a>
+    }
+  </nav>
+</mat-toolbar>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

@@ -1,0 +1,15 @@
+export interface ICourse {
+  _id?: string; // Unique identifier for the course
+  courseTitle: string; // Title of the course
+  courseType: string; //e.g certification,free,video,interactive
+  lessons: Lesson[];
+  description: string; // Description of the course
+  duration: number; // Course Duration
+  created_date: Date;
+}
+
+interface Lesson {
+  title: string;
+  description: string;
+  duration: number;
+}
