@@ -1,1 +1,14 @@
-<p>course-card works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ course.courseTitle }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="courseType">
+      {{ course.courseType }}
+    </div>
+  </mat-card-content>
+  <mat-card-content>{{ course.duration }} mins</mat-card-content>
+  <mat-card-content
+    >Lessons: {{ course.lessons?.length || 0 }}</mat-card-content
+  >
+</mat-card>

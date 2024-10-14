@@ -1,1 +1,21 @@
-<p>courses works!</p>
+<div class="content">
+  <div class="header">
+    <div>
+      <h2>Courses</h2>
+    </div>
+    <div>
+      <button mat-fab extended (click)="addCourse()">Add Course</button>
+    </div>
+  </div>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    @for (course of courses; track $index) {
+    <mat-grid-tile>
+      <app-course-card
+        mat-ripple
+        [course]="course"
+        (click)="openCourse(course)"
+      ></app-course-card>
+    </mat-grid-tile>
+    }
+  </mat-grid-list>
+</div>

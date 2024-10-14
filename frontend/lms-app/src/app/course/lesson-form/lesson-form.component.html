@@ -1,0 +1,56 @@
+<div class="content">
+  <h1>Add Lesson</h1>
+  <form [formGroup]="lessonForm" (ngSubmit)="handleSubmit()">
+    <div class="form-content">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Lesson Title</mat-label>
+          <input
+            type="text"
+            required
+            matInput
+            formControlName="title"
+            placeholder="Ex. Learn Python"
+          />
+          <!-- @if (courseForm.get('fName')?.hasError('required')) {
+          <mat-error>Please enter a first name</mat-error>
+          } -->
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Lesson Description</mat-label>
+          <textarea
+            required
+            matInput
+            formControlName="description"
+            placeholder="Ex. Learn Python"
+          ></textarea>
+          <!-- @if (courseForm.get('fName')?.hasError('required')) {
+          <mat-error>Please enter a first name</mat-error>
+          } -->
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Lesson Duration</mat-label>
+          <input
+            type="number"
+            required
+            matInput
+            formControlName="duration"
+          />
+          <!-- @if (courseForm.get('fName')?.hasError('required')) {
+            <mat-error>Please enter a first name</mat-error>
+            } -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="action">
+      <button type="submit" [disabled]="lessonForm.invalid" mat-fab extended>
+        Add
+      </button>
+      <button type="button" mat-fab extended mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</div>

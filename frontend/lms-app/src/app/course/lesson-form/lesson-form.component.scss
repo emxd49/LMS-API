@@ -1,0 +1,26 @@
+:host {
+  color: white;
+}
+h1 {
+  margin-bottom: 10px;
+}
+.content {
+  margin: 3%;
+}
+.row {
+  display: flex;
+  gap: 15px;
+  justify-content: space-around;
+  margin: 10px;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+  button {
+    width: 40%;
+  }
+}

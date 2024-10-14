@@ -1,0 +1,87 @@
+<div class="content">
+  <h1>@if (courseForm.value._id) {Edit Course} @else {Add Course}</h1>
+  <form [formGroup]="courseForm" (ngSubmit)="handleSubmit()">
+    <div class="form-content">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Course Title</mat-label>
+          <input
+            type="text"
+            required
+            matInput
+            formControlName="courseTitle"
+            placeholder="Ex. Learn Python"
+          />
+          <!-- @if (courseForm.get('fName')?.hasError('required')) {
+        <mat-error>Please enter a first name</mat-error>
+        } -->
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="courseType">
+            @for (option of courseOptions; track $index) {
+            <mat-option value="{{ option }}">{{ option }}</mat-option>
+            }
+          </mat-select>
+          <!-- @if (employeeForm.get('education')?.hasError('required')) {
+        <mat-error>Please select education</mat-error>
+        } -->
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Course Duration</mat-label>
+          <input
+            type="number"
+            required
+            matInput
+            formControlName="duration"
+            placeholder=""
+          />
+          <!-- @if (employeeForm.get('education')?.hasError('required')) {
+        <mat-error>Please select education</mat-error>
+        } -->
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Course Description</mat-label>
+          <textarea
+            required
+            matInput
+            formControlName="description"
+            placeholder="Ex. Learn Python"
+          ></textarea>
+          <!-- @if (courseForm.get('fName')?.hasError('required')) {
+        <mat-error>Please enter a first name</mat-error>
+        } -->
+        </mat-form-field>
+      </div>
+      <div class="lesson-row">
+        <div><h6>Lessons</h6></div>
+        <div>
+          <button type="button" mat-mini-fab (click)="addLesson()">+</button>
+        </div>
+      </div>
+      <div class="lesson-list">
+        <mat-list role="list">
+          @if (!data.lessons || data.lessons.length == 0) {
+          <div>No Lessons</div>
+          } @else { @for (lesson of data.lessons; track $index) {
+          <div class="lesson-items">
+            <div>{{ lesson.title }}</div>
+            <div>{{ lesson.description }}</div>
+            <div>{{ lesson.duration }}</div>
+          </div>
+          } }
+        </mat-list>
+      </div>
+    </div>
+    <div class="action">
+      <button type="submit" [disabled]="courseForm.invalid" mat-fab extended>
+        @if (courseForm.value._id) {Save} @else {Add}
+      </button>
+      <button type="button" mat-fab extended mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</div>

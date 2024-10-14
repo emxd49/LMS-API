@@ -5,6 +5,6 @@ const authRouter = express.Router();
 
 authRouter.route("/register").post(registerUser);
 authRouter.route("/login").post(loginUser);
-authRouter.route("/token").post(refreshToken);
+authRouter.route("/refresh").post(refreshToken);
 
 module.exports = { authRouter };

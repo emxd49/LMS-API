@@ -1,0 +1,33 @@
+:host {
+  color: white;
+}
+
+mat-card {
+  padding: 2%;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2%;
+  border-bottom: 1px purple solid;
+}
+
+.enroll-section {
+  text-align: center;
+  border-top: 1px purple solid;
+  padding-top: 2%;
+  margin-top: 2%;
+}
+
+mat-card-content {
+  margin: 1% 0%;
+}
+
+.data {
+  color: rgba(255, 255, 255, 0.689);
+}
+
+.del-btn {
+  background-color: red;
+}

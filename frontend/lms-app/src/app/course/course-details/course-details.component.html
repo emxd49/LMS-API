@@ -1,0 +1,46 @@
+<mat-card appearance="outlined">
+  <div class="header-section">
+    <div>
+      <mat-card-header>
+        <mat-card-title>{{ data.courseTitle }}</mat-card-title>
+      </mat-card-header>
+    </div>
+    <div>
+      <button class="edit-btn" mat-icon-button (click)="editCourse()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="del-btn" mat-icon-button (click)="deleteCourse()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-card-content>
+    <div>Course Type:</div>
+    <div class="courseType data">{{ data.courseType }}</div>
+  </mat-card-content>
+  <mat-card-content>
+    <div>Description:</div>
+    <div class="data">{{ data.description }}</div>
+  </mat-card-content>
+  <mat-card-content>
+    <div>Date Created:</div>
+    <div class="data">{{ data.created_date | date }}</div>
+  </mat-card-content>
+  <mat-card-content>
+    <div>Course Duration:</div>
+    <div class="data">{{ data.duration }} mins</div>
+  </mat-card-content>
+  <mat-card-content>
+    <div>Lessons:</div>
+    @for (lesson of data.lessons; track $index) {
+      <div class="data">{{ lesson.title }}</div>
+      <div class="data">{{ lesson.description }}</div>
+      <div class="data">{{ lesson.duration }}</div>
+    }
+  </mat-card-content>
+  <div class="enroll-section">
+    <button mat-flat-button [disabled]="enrolled" (click)="enrollCourse()">
+      @if (enrolled) {Enrolled} @else {Enroll}
+    </button>
+  </div>
+</mat-card>

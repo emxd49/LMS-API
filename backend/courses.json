@@ -1,0 +1,79 @@
+[
+  {
+    "courseTitle": "Web Development Basics",
+    "courseType": "Self-Paced",
+    "description": "Learn the fundamentals of web development, including HTML, CSS, and JavaScript.",
+    "duration": 120,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Data Science Essentials",
+    "courseType": "Instructor-Led",
+    "description": "An introductory course covering key concepts in data science, including data analysis and machine learning.",
+    "duration": 180,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Digital Marketing 101",
+    "courseType": "Online",
+    "description": "Explore the basics of digital marketing, including SEO, social media, and email marketing.",
+    "duration": 150,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Mobile App Development",
+    "courseType": "Self-Paced",
+    "description": "Learn how to develop mobile applications for iOS and Android using popular frameworks.",
+    "duration": 200,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Introduction to Cybersecurity",
+    "courseType": "Instructor-Led",
+    "description": "Understand the fundamentals of cybersecurity, including threat detection and prevention.",
+    "duration": 160,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Graphic Design Fundamentals",
+    "courseType": "Online",
+    "description": "Learn the principles of graphic design and how to create compelling visual content.",
+    "duration": 140,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Photography Basics",
+    "courseType": "Self-Paced",
+    "description": "Discover the essential techniques of photography, from composition to editing.",
+    "duration": 130,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Introduction to Machine Learning",
+    "courseType": "Instructor-Led",
+    "description": "Get started with machine learning concepts and algorithms using Python.",
+    "duration": 170,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Public Speaking Mastery",
+    "courseType": "Online",
+    "description": "Enhance your public speaking skills and learn techniques for effective communication.",
+    "duration": 110,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Introduction to Blockchain Technology",
+    "courseType": "Self-Paced",
+    "description": "Explore the basics of blockchain technology and its applications in various industries.",
+    "duration": 150,
+    "created_date": "2024-10-14T00:00:00Z"
+  },
+  {
+    "courseTitle": "Creative Writing Workshop",
+    "courseType": "Instructor-Led",
+    "description": "Develop your writing skills through exercises and feedback in a supportive environment.",
+    "duration": 160,
+    "created_date": "2024-10-14T00:00:00Z"
+  }
+]

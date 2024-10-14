@@ -6,7 +6,8 @@ import { EnrolledCoursesComponent } from './enrolled-courses/enrolled-courses.co
 const routes: Routes = [
   {
     path: '',
-    component: CoursesComponent,
+    redirectTo: 'courses',
+    pathMatch: 'full',
   },
   {
     path: 'courses',

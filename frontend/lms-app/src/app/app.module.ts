@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTab, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLinkActive } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatTabsModule,
     MatTab,
+    RouterLinkActive
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
