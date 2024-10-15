@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 import { CourseService } from '../../services/course.service';
-import { firstValueFrom, lastValueFrom, Observable, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  firstValueFrom,
+  forkJoin,
+  lastValueFrom,
+  Observable,
+  of,
+} from 'rxjs';
 import { ICourse } from '../../data.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-enrolled-courses',
@@ -10,29 +18,31 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './enrolled-courses.component.scss',
 })
 export class EnrolledCoursesComponent {
-  displayedColumns: string[] = ['title', 'type', 'description'];
-  enrolledCoursesList$!: Observable<ICourse[]>;
-  enrolledCoursesSource: MatTableDataSource<ICourse> = new MatTableDataSource();
+  displayedColumns: string[] = ['title', 'type', 'description', 'unenroll'];
+  dataSource: any = new MatTableDataSource();
+  enrolledCoursesList: ICourse[] = [];
   constructor(private courseService: CourseService) {}
   ngOnInit() {
-    // const enrolledCourses = this.courseService.getEnrolledCourses('emad');
-    // if (enrolledCourses && enrolledCourses.length > 0) {
-    //   for (const eCourse of enrolledCourses) {
-    //     lastValueFrom(this.courseService.getCourse(eCourse)).then(
-    //       (courseDetails) => {
-    //         this.enrolledCoursesList$.push(of(courseDetails));
-    //       }
-    //     );
-    //   }
-    // }
+    this.loadEnrolledCourses();
+  }
+  loadEnrolledCourses() {
+    const enrolledCourses = this.courseService.getEnrolledCourses();
+    if (!enrolledCourses || enrolledCourses.length == 0) {
+      this.dataSource = [];
+      return;
+    }
+    const getCoursesObs = [];
+    for (const eCourse of enrolledCourses) {
+      getCoursesObs.push(this.courseService.getCourse(eCourse));
+    }
+    const observable = forkJoin(getCoursesObs);
+    observable.subscribe((data) => {
+      this.dataSource = data;
+    });
   }
 
-  loadCourses() {
-
+  deleteEnrolledCourse(courseID: string) {
+    this.courseService.removeEnrolledCourse(courseID);
+    this.loadEnrolledCourses();
   }
-
-  ngAfterViewInit() {
-
-  }
-  deleteEnrolledCourse() {}
 }

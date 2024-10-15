@@ -3,8 +3,17 @@
 }
 .content {
   margin: 3%;
+  height: 80%;
 }
 .header {
     display: flex;
     justify-content: space-between;
 }
+
+.no-course {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.523);
+}  

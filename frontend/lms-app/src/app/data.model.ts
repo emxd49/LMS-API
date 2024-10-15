@@ -26,3 +26,9 @@ export interface IUser {
   username: string;
   password: string;
 }
+
+export interface IUserAuthRes {
+  username: string;
+  accessToken: string;
+  refreshToken: string;
+}

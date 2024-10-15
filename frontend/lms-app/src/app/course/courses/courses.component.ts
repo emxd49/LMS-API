@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CourseFormComponent } from '../course-form/course-form.component';
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 import { IconHarnessFilters } from '@angular/material/icon/testing';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-courses',
@@ -17,7 +18,8 @@ export class CoursesComponent {
   courses: ICourse[] = [];
   constructor(
     private courseService: CourseService,
-    private router: Router // private authService: AuthService
+    private router: Router,
+    private authService: AuthService
   ) {}
   ngOnInit() {
     this.loadCourses();
@@ -54,7 +56,7 @@ export class CoursesComponent {
       duration: data.duration,
       created_date: data.created_date,
     };
-    console.log("Base component:", data.lessons);
+    console.log('Base component:', data.lessons);
     this.courseService
       // @ts-ignore
       .updateCourse(data._id, course)
@@ -92,7 +94,7 @@ export class CoursesComponent {
         }
         if (data == 'enrol') {
           // @ts-ignore
-          this.courseService.addEnrolledCourses('emad', course._id);
+          this.courseService.addEnrolledCourses(course._id);
           return;
         }
         if (data._id) {

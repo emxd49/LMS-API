@@ -9,6 +9,7 @@ import { MatTab, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLinkActive } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -19,7 +20,8 @@ import { RouterLinkActive } from '@angular/router';
     MatToolbarModule,
     MatTabsModule,
     MatTab,
-    RouterLinkActive
+    RouterLinkActive,
+    MatButtonModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

@@ -5,7 +5,11 @@ import { EnrolledCoursesComponent } from './enrolled-courses/enrolled-courses.co
 import { CourseRoutingModule } from './course-routing.module';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseService } from '../services/course.service';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -25,6 +29,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { MatIcon } from '@angular/material/icon';
 import { LessonFormComponent } from './lesson-form/lesson-form.component';
 import { MatTableModule } from '@angular/material/table';
+import { authInterceptor } from '../interceptors/auth-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,8 +56,11 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatIconButton,
     MatIcon,
-    MatTableModule
+    MatTableModule,
   ],
-  providers: [CourseService],
+  providers: [
+    CourseService,
+    provideHttpClient(withInterceptors([authInterceptor])),
+  ],
 })
 export class CourseModule {}

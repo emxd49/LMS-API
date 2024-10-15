@@ -1,0 +1,26 @@
+mat-toolbar {
+    div{
+        margin-right:1%;
+    }
+    img {
+      width: 60px;
+    }
+    button {
+        height: 40px;
+    }
+    .greet {
+        font-size: medium;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+        margin: 0px 2%;
+    }
+}

@@ -8,65 +8,61 @@ import {
   ILesson,
 } from '../data.model';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: CourseModule,
 })
 export class CourseService {
   baseURL = 'http://localhost:5000/api/course';
-  constructor(private http: HttpClient) {}
-  private getHeaders(): HttpHeaders {
-    const authToken = localStorage.getItem('accessToken');
-    return new HttpHeaders({ Authorization: `Bearer ${authToken}` });
+  user: string;
+  constructor(private http: HttpClient, private authService: AuthService) {
+    // @ts-ignore
+    this.user = this.authService.getUser();
   }
   getCourse(id: string): Observable<ICourse> {
-    const headers = this.getHeaders();
-    return this.http.get<ICourse>(`${this.baseURL}/${id}`, { headers });
+    return this.http.get<ICourse>(`${this.baseURL}/${id}`);
   }
   getCourses(): Observable<ICourse[]> {
-    const headers = this.getHeaders();
-    return this.http.get<ICourse[]>(this.baseURL, { headers });
+    return this.http.get<ICourse[]>(this.baseURL);
   }
   deleteCourse(id: string): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.delete(`${this.baseURL}/${id}`, { headers });
+    return this.http.delete(`${this.baseURL}/${id}`);
   }
   updateCourse(id: string, course: ICourse) {
-    const headers = this.getHeaders();
-    return this.http.put(`${this.baseURL}/${id}`, course, { headers });
+    return this.http.put(`${this.baseURL}/${id}`, course);
   }
   addCourse(course: ICourse) {
-    const headers = this.getHeaders();
-    return this.http.post(this.baseURL, course, { headers });
+    return this.http.post(this.baseURL, course);
   }
   // ================= localStorage Operations ===============
-  getEnrolledCourses(user: string): any {
+  getEnrolledCourses(): any {
     let rawEnrolledCourses = localStorage.getItem('enrolledCourses');
     if (!rawEnrolledCourses) {
       return null;
     }
     let enrolledCourses: IEnrolledCourses = JSON.parse(rawEnrolledCourses);
-    return enrolledCourses[user];
+    return enrolledCourses[this.user];
   }
-  removeEnrolledCourse(user: string, courseID: string) {
+  removeEnrolledCourse(courseID: string) {
     let rawEnrolledCourses = localStorage.getItem('enrolledCourses');
     if (!rawEnrolledCourses) {
       return;
     }
     const userEnrolledCourse: IEnrolledCourses = JSON.parse(rawEnrolledCourses);
-    if (!userEnrolledCourse[user]) {
+    if (!userEnrolledCourse[this.user]) {
       return;
     }
-    userEnrolledCourse[user] = userEnrolledCourse[user].filter(
+    userEnrolledCourse[this.user] = userEnrolledCourse[this.user].filter(
       (id) => id !== courseID
     );
     localStorage.setItem('enrolledCourses', JSON.stringify(userEnrolledCourse));
   }
-  addEnrolledCourses(username: string, courseID: string) {
+  addEnrolledCourses(courseID: string) {
     let rawEnrolledCourses = localStorage.getItem('enrolledCourses');
     if (!rawEnrolledCourses) {
       const userEnrolledCourse: IEnrolledCourses = {};
-      userEnrolledCourse[username] = [courseID];
+      userEnrolledCourse[this.user] = [courseID];
       localStorage.setItem(
         'enrolledCourses',
         JSON.stringify(userEnrolledCourse)
@@ -74,15 +70,15 @@ export class CourseService {
       return;
     }
     const enrolledCourses: IEnrolledCourses = JSON.parse(rawEnrolledCourses);
-    if (enrolledCourses[username]) {
-      if (enrolledCourses[username].includes(courseID)) {
+    if (enrolledCourses[this.user]) {
+      if (enrolledCourses[this.user].includes(courseID)) {
         return;
       }
-      enrolledCourses[username].push(courseID);
+      enrolledCourses[this.user].push(courseID);
       localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
       return;
     }
-    enrolledCourses[username] = [courseID];
+    enrolledCourses[this.user] = [courseID];
     localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
   }
   getLessons(courseID: string) {

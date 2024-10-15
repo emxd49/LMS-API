@@ -7,6 +7,9 @@
       <button mat-fab extended (click)="addCourse()">Add Course</button>
     </div>
   </div>
+  @if (courses.length==0) {
+  <div class="no-course"><h1>No courses. Please add a course</h1></div>
+  } @else {
   <mat-grid-list cols="3" rowHeight="2:1">
     @for (course of courses; track $index) {
     <mat-grid-tile>
@@ -18,4 +21,5 @@
     </mat-grid-tile>
     }
   </mat-grid-list>
+  }
 </div>

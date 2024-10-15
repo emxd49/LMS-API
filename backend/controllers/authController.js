@@ -42,8 +42,18 @@ const refreshToken = asyncHandler(async (req, res) => {
   res.status(200).json({ accessToken: accessToken });
 });
 
+const currentUser = asyncHandler(async (req, res) => {
+  const { accessToken } = req.body;
+  if (!accessToken) {
+    res.status(401);
+    throw new Error("No token provided");
+  }
+  const username = authService.currentUser(accessToken);
+  res.status(200).json({ username: username });
+});
+
 const logoutUser = asyncHandler(async (req, res) => {
   //!to be implemented
 });
 
-module.exports = { registerUser, loginUser, refreshToken };
+module.exports = { registerUser, loginUser, currentUser, refreshToken };

@@ -24,7 +24,7 @@ export class CourseDetailsComponent {
 
   ngOnInit() {
     this.enrolled = this.courseService
-      .getEnrolledCourses('emad')
+      .getEnrolledCourses()
       ?.includes(this.data._id);
   }
 

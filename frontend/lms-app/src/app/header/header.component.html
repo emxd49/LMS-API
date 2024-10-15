@@ -1,18 +1,36 @@
 <mat-toolbar>
-  <div>
-    <span>{{ title }}</span>
+  <div class="section">
+    <div>
+      <img
+        src="https://img.icons8.com/?size=100&id=79277&format=png&color=C850F2"
+        alt=""
+      />
+    </div>
+    <div>
+      <span>{{ title }}</span>
+    </div>
   </div>
-  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-    @for (tab of tabs; track tab) {
-    <a
-      mat-tab-link
-      [routerLink]="tab.route"
-      (click)="activeLink = tab.displayName"
-      [active]="activeLink == tab.displayName"
-    >
-      {{ tab.displayName }}
-    </a>
-    }
-  </nav>
+  @if (user) {
+  <div>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      @for (tab of tabs; track tab) {
+      <a
+        mat-tab-link
+        [routerLink]="tab.route"
+        (click)="activeLink = tab.displayName"
+        [active]="activeLink == tab.displayName"
+      >
+        {{ tab.displayName }}
+      </a>
+      }
+    </nav>
+  </div>
+  <div class="section">
+    <div class="greet">Hello, {{ user }}</div>
+    <div>
+      <button mat-fab extended (click)="logout()">Logout</button>
+    </div>
+  </div>
+  }
 </mat-toolbar>
 <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

@@ -58,10 +58,19 @@ const loginUser = async (username, password) => {
   return { accessToken, refreshToken };
 };
 
+const currentUser = (accessToken) => {
+  try {
+    const decoded = jwt.verify(accessToken, JWTKEY);
+    return decoded.username;
+  } catch (error) {
+    throw new AppError(401, "Invalid access token");
+  }
+};
+
 const generateToken = (refreshToken) => {
   try {
-    const decoded = jwt.verify(refreshToken, secretKey);
-    const accessToken = jwt.sign({ username: decoded.username }, secretKey, {
+    const decoded = jwt.verify(refreshToken, JWTKEY);
+    const accessToken = jwt.sign({ username: decoded.username }, JWTKEY, {
       expiresIn: JWTEXPIRY,
     });
     return accessToken;
@@ -70,4 +79,4 @@ const generateToken = (refreshToken) => {
   }
 };
 
-module.exports = { getUser, addUser, loginUser, generateToken };
+module.exports = { getUser, addUser, loginUser, generateToken, currentUser };
