@@ -21,3 +21,8 @@ export interface IEnrolledCourses {
 export interface ICourseLessons {
   [course_id: string]: ILesson[];
 }
+
+export interface IUser {
+  username: string;
+  password: string;
+}

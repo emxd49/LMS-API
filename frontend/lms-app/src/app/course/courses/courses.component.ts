@@ -54,6 +54,7 @@ export class CoursesComponent {
       duration: data.duration,
       created_date: data.created_date,
     };
+    console.log("Base component:", data.lessons);
     this.courseService
       // @ts-ignore
       .updateCourse(data._id, course)

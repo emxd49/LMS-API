@@ -14,4 +14,8 @@ export class CourseCardComponent {
     // @ts-ignore
     this.course.lessons = this.courseService.getLessons(this.course._id);
   }
+  ngOnChanges() {
+    // @ts-ignore
+    this.course.lessons = this.courseService.getLessons(this.course._id);
+  }
 }

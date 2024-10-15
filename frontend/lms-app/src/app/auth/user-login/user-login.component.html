@@ -1,1 +1,41 @@
-<p>user-login works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title><h3>Login</h3></mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="authLoginForm" (ngSubmit)="handleSubmit()">
+    <div class="content">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>username</mat-label>
+          <input type="text" required matInput formControlName="username" />
+          @if (authLoginForm.get('username')?.hasError('required')) {
+          <mat-error>Please enter username</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>password</mat-label>
+          <input type="password" required matInput formControlName="password" />
+          @if (authLoginForm.get('password')?.hasError('required')) {
+          <mat-error>Please enter password</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="action">
+      <button type="submit" [disabled]="authLoginForm.invalid" mat-fab extended>
+        Login
+      </button>
+      <!-- <button
+        style="background-color: rgb(255, 136, 0)"
+        type="button"
+        routerLink="/"
+        mat-fab
+        extended
+      >
+        Cancel
+      </button> -->
+    </div>
+  </form>
+</mat-card>

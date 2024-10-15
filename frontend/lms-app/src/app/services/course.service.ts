@@ -88,7 +88,7 @@ export class CourseService {
   getLessons(courseID: string) {
     let rawLessons = localStorage.getItem('lessons');
     if (!rawLessons) {
-      return null;
+      return undefined;
     }
     let courseLessons: ICourseLessons = JSON.parse(rawLessons);
     return courseLessons[courseID];
@@ -108,6 +108,12 @@ export class CourseService {
       return;
     }
     for (const l of lesson) {
+      const foundLesson = courseLessons[courseID].filter(
+        (less) => less.title == l.title
+      );
+      if (foundLesson.length > 0) {
+        continue;
+      }
       courseLessons[courseID].push(l);
     }
     localStorage.setItem('lessons', JSON.stringify(courseLessons));

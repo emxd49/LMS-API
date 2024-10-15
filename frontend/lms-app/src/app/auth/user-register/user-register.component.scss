@@ -1,0 +1,36 @@
+:host {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+  }
+  mat-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+  }
+  .content {
+    //   padding: 20px;
+    margin: 20px 15px;
+  }
+  form {
+      width: 100%;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  .action {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5%;
+  }
+  

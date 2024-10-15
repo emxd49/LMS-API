@@ -24,6 +24,7 @@ import { MatListModule } from '@angular/material/list';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { MatIcon } from '@angular/material/icon';
 import { LessonFormComponent } from './lesson-form/lesson-form.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { LessonFormComponent } from './lesson-form/lesson-form.component';
     MatListModule,
     MatIconButton,
     MatIcon,
+    MatTableModule
   ],
   providers: [CourseService],
 })

@@ -38,6 +38,7 @@ export class CourseDetailsComponent {
       if (!data) {
         return;
       }
+      console.log('course details comp', data);
       this.dialogRef.close(data);
     });
   }

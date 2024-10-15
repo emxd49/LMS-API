@@ -21,12 +21,12 @@ export class CourseFormComponent {
     public dialogRef: MatDialogRef<CourseFormComponent>
   ) {}
   courseOptions = ['Certification', 'Free', 'Video', 'Interactive'];
-  // lessons: ILesson[] | undefined = [];
+  currentLessons: ILesson[] = [];
   courseForm = new FormGroup({
     _id: new FormControl<string | null>(null),
     courseTitle: new FormControl('', [Validators.required]),
     courseType: new FormControl('', [Validators.required]),
-    lessons: new FormControl<any>(null),
+    lessons: new FormControl<ILesson[]>([]),
     description: new FormControl('', [Validators.required]),
     duration: new FormControl<number | null>(null, [Validators.required]),
     created_date: new FormControl(new Date(), [Validators.required]),
@@ -38,11 +38,14 @@ export class CourseFormComponent {
         _id: this.data._id,
         courseTitle: this.data.courseTitle,
         courseType: this.data.courseType,
+        // lessons: this.data.lessons,
         description: this.data.description,
         duration: this.data.duration,
         created_date: this.data.created_date,
       });
+      this.currentLessons = this.data.lessons || [];
     }
+    console.log('form comp', this.data.lessons);
   }
 
   addLesson() {
@@ -51,16 +54,12 @@ export class CourseFormComponent {
       width: '90%',
     });
     newLessonDialog.afterClosed().subscribe((data) => {
-      if (this.data.lessons) {
-        this.data.lessons.push(data);
-      } else {
-        this.data.lessons = [data];
-      }
-      this.courseForm.patchValue({ lessons: this.data.lessons });
+      this.currentLessons.push(data);
     });
   }
 
   handleSubmit() {
+    this.courseForm.patchValue({ lessons: this.currentLessons });
     this.dialogRef.close(this.courseForm.value);
   }
 }

@@ -65,9 +65,9 @@
       </div>
       <div class="lesson-list">
         <mat-list role="list">
-          @if (!data.lessons || data.lessons.length == 0) {
+          @if (!currentLessons || currentLessons.length == 0) {
           <div>No Lessons</div>
-          } @else { @for (lesson of data.lessons; track $index) {
+          } @else { @for (lesson of currentLessons; track $index) {
           <div class="lesson-items">
             <div>{{ lesson.title }}</div>
             <div>{{ lesson.description }}</div>

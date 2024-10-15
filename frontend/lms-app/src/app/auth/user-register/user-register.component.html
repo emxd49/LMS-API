@@ -1,1 +1,46 @@
-<p>user-register works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title><h3>Register</h3></mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="authRegisterForm" (ngSubmit)="handleSubmit()">
+    <div class="content">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>username</mat-label>
+          <input type="text" required matInput formControlName="username" />
+          @if (authRegisterForm.get('username')?.hasError('required')) {
+          <mat-error>Please enter username</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>password</mat-label>
+          <input type="password" required matInput formControlName="password" />
+          @if (authRegisterForm.get('password')?.hasError('required')) {
+          <mat-error>Please enter password</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="action">
+      <button
+        type="submit"
+        [disabled]="authRegisterForm.invalid"
+        mat-fab
+        extended
+      >
+        Register
+      </button>
+      <!-- <button
+          style="background-color: rgb(255, 136, 0)"
+          type="button"
+          routerLink="/"
+          mat-fab
+          extended
+        >
+          Cancel
+        </button> -->
+    </div>
+  </form>
+</mat-card>
