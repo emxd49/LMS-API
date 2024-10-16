@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-app.use("/api/course",courseRouter);
+app.use("/api/course",validateTokenHandler,courseRouter);
 app.use(errorHandler);
 app.listen(port, () => {
   console.log("Server runnning on PORT:", port);

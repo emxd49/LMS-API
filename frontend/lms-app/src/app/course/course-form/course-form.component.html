@@ -67,13 +67,26 @@
         <mat-list role="list">
           @if (!currentLessons || currentLessons.length == 0) {
           <div>No Lessons</div>
-          } @else { @for (lesson of currentLessons; track $index) {
+          } @else {
           <div class="lesson-items">
-            <div>{{ lesson.title }}</div>
-            <div>{{ lesson.description }}</div>
-            <div>{{ lesson.duration }}</div>
+            <div class="lesson-header">Title</div>
+            <div class="lesson-header">Description</div>
+            <div class="lesson-header">Duration</div>
+            <div class="lesson-rem"></div>
           </div>
-          } }
+          @for (lesson of currentLessons; track $index) {
+          <div class="lesson-items">
+            <div class="lesson-row">{{ lesson.title }}</div>
+            <div class="lesson-row">{{ lesson.description }}</div>
+            <div class="lesson-row">{{ lesson.duration }}</div>
+            <div>
+              <button type="button" (click)="removeLesson(lesson.title)" mat-mini-fab>
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </div>
+            }
+          }
         </mat-list>
       </div>
     </div>

@@ -32,11 +32,13 @@
   </mat-card-content>
   <mat-card-content>
     <div>Lessons:</div>
-    @for (lesson of data.lessons; track $index) {
-      <div class="data">{{ lesson.title }}</div>
-      <div class="data">{{ lesson.description }}</div>
-      <div class="data">{{ lesson.duration }}</div>
-    }
+    @if (!data.lessons || data.lessons.length == 0) {
+    <div class="data">No Lessons</div>
+    } @else { @for (lesson of data.lessons; track $index) {
+    <div class="data">Title: {{ lesson.title }}</div>
+    <div class="data">Description: {{ lesson.description }}</div>
+    <div class="data">Duration: {{ lesson.duration }} mins</div>
+    } }
   </mat-card-content>
   <div class="enroll-section">
     <button mat-flat-button [disabled]="enrolled" (click)="enrollCourse()">

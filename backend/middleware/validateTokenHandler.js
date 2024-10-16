@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
-
+const JWTKEY = process.env.JWT_KEY;
 const validateTokenHandler = asyncHandler((req, res, next) => {
   if (
     !req.headers.authorization ||
@@ -11,7 +11,7 @@ const validateTokenHandler = asyncHandler((req, res, next) => {
   }
   
   const token = req.headers.authorization.split(" ")[1];
-  jwt.verify(token, process.env.JWTKEY, (err, decoded) => {
+  jwt.verify(token, JWTKEY, (err, decoded) => {
     if (err) {
       res.status(401);
       throw new Error("User is not authorized");

@@ -28,7 +28,7 @@ export class CourseFormComponent {
     courseType: new FormControl('', [Validators.required]),
     lessons: new FormControl<ILesson[]>([]),
     description: new FormControl('', [Validators.required]),
-    duration: new FormControl<number | null>(null, [Validators.required]),
+    duration: new FormControl<number | null>(null, [Validators.required, Validators.min(3)]),
     created_date: new FormControl(new Date(), [Validators.required]),
   });
 
@@ -54,8 +54,15 @@ export class CourseFormComponent {
       width: '90%',
     });
     newLessonDialog.afterClosed().subscribe((data) => {
+      if (!data) {
+        return;
+      }
       this.currentLessons.push(data);
     });
+  }
+
+  removeLesson(title: string) {
+    this.currentLessons = this.currentLessons.filter((l) => l.title !== title);
   }
 
   handleSubmit() {

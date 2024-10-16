@@ -10,9 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -21,7 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTabsModule,
     MatTab,
     RouterLinkActive,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

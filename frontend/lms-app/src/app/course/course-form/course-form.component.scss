@@ -51,8 +51,19 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  button{
+    width: auto;
+    height: fit-content;
+  }
+}
+.lesson-rem {
+  width: 20px;
 }
 // .form-content {
 //     display: flex;
 //     flex-direction: column;
 // }
+
+lesson-header {
+  text-decoration: underline;
+}

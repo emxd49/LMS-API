@@ -11,6 +11,7 @@ import {
 import { ICourse } from '../../data.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/collections';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-enrolled-courses',
@@ -21,7 +22,10 @@ export class EnrolledCoursesComponent {
   displayedColumns: string[] = ['title', 'type', 'description', 'unenroll'];
   dataSource: any = new MatTableDataSource();
   enrolledCoursesList: ICourse[] = [];
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private authService: AuthService
+  ) {}
   ngOnInit() {
     this.loadEnrolledCourses();
   }

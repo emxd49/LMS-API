@@ -3,7 +3,11 @@
     <div>
       <h2>Courses</h2>
     </div>
-    <div>
+    <div class="right-section">
+      <mat-form-field class="search-field">
+        <mat-label>Search</mat-label>
+        <input (keyup)="filterCourse($event)" matInput placeholder="Ex. Web" />
+      </mat-form-field>
       <button mat-fab extended (click)="addCourse()">Add Course</button>
     </div>
   </div>
@@ -11,7 +15,7 @@
   <div class="no-course"><h1>No courses. Please add a course</h1></div>
   } @else {
   <mat-grid-list cols="3" rowHeight="2:1">
-    @for (course of courses; track $index) {
+    @for (course of filteredCourses; track $index) {
     <mat-grid-tile>
       <app-course-card
         mat-ripple

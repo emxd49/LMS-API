@@ -15,10 +15,15 @@ import { AuthService } from './auth.service';
 })
 export class CourseService {
   baseURL = 'http://localhost:5000/api/course';
-  user: string;
+  user: any = null;
   constructor(private http: HttpClient, private authService: AuthService) {
+    // this.user = this.authService.getUser();
     // @ts-ignore
-    this.user = this.authService.getUser();
+    this.authService.userObs$.subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
   }
   getCourse(id: string): Observable<ICourse> {
     return this.http.get<ICourse>(`${this.baseURL}/${id}`);
@@ -42,6 +47,9 @@ export class CourseService {
       return null;
     }
     let enrolledCourses: IEnrolledCourses = JSON.parse(rawEnrolledCourses);
+    console.log(enrolledCourses);
+    console.log(this.user);
+    
     return enrolledCourses[this.user];
   }
   removeEnrolledCourse(courseID: string) {
@@ -80,6 +88,19 @@ export class CourseService {
     }
     enrolledCourses[this.user] = [courseID];
     localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
+  }
+  removeEnrolledCourseForAll(courseID: string) {
+    let rawEnrolledCourses = localStorage.getItem('enrolledCourses');
+    if (!rawEnrolledCourses) {
+      return;
+    }
+    const userEnrolledCourse: IEnrolledCourses = JSON.parse(rawEnrolledCourses);
+    for (const enrolledCourses in userEnrolledCourse) {
+      userEnrolledCourse[enrolledCourses] = userEnrolledCourse[
+        enrolledCourses
+      ].filter((id) => id !== courseID);
+    }
+    localStorage.setItem('enrolledCourses', JSON.stringify(userEnrolledCourse));
   }
   getLessons(courseID: string) {
     let rawLessons = localStorage.getItem('lessons');

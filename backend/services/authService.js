@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const { AppError } = require("../utils/appError");
+const { validatePasswordInput } = require("../utils/validator");
 const JWTKEY = process.env.JWT_KEY;
 const JWTEXPIRY = process.env.JWT_EXPIRY_TIME || "30m";
 const JWTREFRESHEXPIRY = process.env.JWT_REFRESH_TOKEN_EXPIRY_TIME || "24h";
@@ -17,8 +18,8 @@ const addUser = async (username, password) => {
   if (!validator.isEmail(username)) {
     throw new AppError(400, "Invalid username provided");
   }
-  if (password.length < MINPASSWORDLENGTH) {
-    throw new AppError(400, "Password should be atleast 8 characters long");
+  if (!validatePasswordInput(password)) {
+    throw new AppError(400, "Password does not match requirement");
   }
   const existingUser = await userModel.findOne({ username: username });
   if (existingUser) {

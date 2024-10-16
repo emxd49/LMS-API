@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { CourseFormComponent } from '../course-form/course-form.component';
 import { CourseService } from '../../services/course.service';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-course-details',
@@ -43,7 +44,17 @@ export class CourseDetailsComponent {
     });
   }
   deleteCourse() {
-    this.dialogRef.close('del');
+    const delDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: 'Delete Course',
+    });
+    delDialog.afterClosed().subscribe((data: undefined | Boolean) => {
+      console.log(data);
+      if (!data) {
+        return;
+      }
+      this.dialogRef.close('del');
+    });
   }
 
   enrollCourse() {

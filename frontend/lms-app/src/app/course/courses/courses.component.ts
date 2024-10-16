@@ -7,6 +7,7 @@ import { CourseFormComponent } from '../course-form/course-form.component';
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 import { IconHarnessFilters } from '@angular/material/icon/testing';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-courses',
@@ -14,8 +15,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  dialog = inject(MatDialog);
+  snackBar = inject(MatSnackBar);
+  readonly dialog = inject(MatDialog);
   courses: ICourse[] = [];
+  filteredCourses: ICourse[] = [];
   constructor(
     private courseService: CourseService,
     private router: Router,
@@ -28,6 +31,7 @@ export class CoursesComponent {
   loadCourses() {
     this.courseService.getCourses().subscribe((courses) => {
       this.courses = courses;
+      this.filteredCourses = courses;
       console.log(courses);
     });
   }
@@ -44,6 +48,9 @@ export class CoursesComponent {
       this.courseService.addCourse(data).subscribe((course) => {
         console.log(course);
         this.loadCourses();
+        this.snackBar.open('Course successfully added!', 'Ok', {
+          duration: 3000,
+        });
       });
     });
   }
@@ -63,16 +70,34 @@ export class CoursesComponent {
       .subscribe((updatedCourse) => {
         console.log('Course updated', updatedCourse);
         // @ts-ignore
-        this.courseService.addLesson(data._id, data.lessons);
+        this.courseService.updateLesson(data._id, data.lessons);
         this.loadCourses();
+        this.snackBar.open('Course successfully updated!', 'Ok', {
+          duration: 3000,
+        });
       });
   }
 
   deleteCourse(courseID: string) {
     this.courseService.deleteCourse(courseID).subscribe((delCourse) => {
       console.log('Deleted Course', delCourse);
+      this.courseService.removeEnrolledCourseForAll(courseID);
       this.loadCourses();
+      this.snackBar.open('Course successfully deleted!', 'Ok', {
+        duration: 3000,
+      });
     });
+  }
+
+  filterCourse(event: Event) {
+    const input = (event.target as HTMLInputElement).value;
+    if (!input) {
+      this.filteredCourses = this.courses;
+      return;
+    }
+    this.filteredCourses = this.courses.filter((course) =>
+      course?.courseTitle.toLowerCase().includes(input.toLowerCase())
+    );
   }
 
   openCourse(course: ICourse) {
@@ -95,6 +120,9 @@ export class CoursesComponent {
         if (data == 'enrol') {
           // @ts-ignore
           this.courseService.addEnrolledCourses(course._id);
+          this.snackBar.open('Enrolled Successfully!', 'Ok', {
+            duration: 3000,
+          });
           return;
         }
         if (data._id) {

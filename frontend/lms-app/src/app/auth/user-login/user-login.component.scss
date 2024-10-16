@@ -30,6 +30,9 @@ form {
 
 .action {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 5%;
+    button {
+      width: 40%;
+    }
 }

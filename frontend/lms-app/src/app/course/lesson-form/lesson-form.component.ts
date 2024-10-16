@@ -12,7 +12,10 @@ export class LessonFormComponent {
   lessonForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    duration: new FormControl<number | null>(null, [Validators.required]),
+    duration: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(3),
+    ]),
   });
 
   handleSubmit() {
